@@ -196,7 +196,7 @@ function App() {
                 <h3 className="text-3xl font-bold mb-3">Visionary Leadership</h3>
                 <p className="text-blue-100 text-lg leading-relaxed mb-4">
                   Founded by a passionate technologist with a vision to bridge the gap between business challenges
-                  and technological solutions. Our founder brings years of industry experience and a deep commitment
+                  and technological solutions. Our founder, Shalom-David brings years of industry experience and a deep commitment
                   to excellence.
                 </p>
                 <div className="flex justify-center md:justify-start gap-4">
