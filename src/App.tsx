@@ -91,10 +91,11 @@ function App() {
             <p className="text-xl md:text-2xl text-gray-100 mb-10 leading-relaxed animate-fade-in-up stagger-2">
               Transforming businesses through innovative technology solutions and expert consulting
             </p>
-            <button className="group bg-orange-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl inline-flex items-center gap-2 animate-fade-in-up stagger-3">
+            <a href='#contact'><button className="group bg-orange-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl inline-flex items-center gap-2 animate-fade-in-up stagger-3">
               Get Started
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
+            </a>
           </div>
         </div>
       </section>
@@ -190,7 +191,7 @@ function App() {
           <div className="bg-white/10 backdrop-blur-sm p-10 rounded-2xl shadow-2xl animate-fade-in-up stagger-2">
             <div className="flex flex-col md:flex-row items-center gap-8">
               <div className="w-48 h-48 rounded-full overflow-hidden shadow-xl flex-shrink-0 border-4 border-white/30">
-                <img src={founder} alt="Founder" className="w-full h-full object-cover" />
+                <img src={founder} alt="Founder" className="w-full h-64 object-cover" />
               </div>
               <div className="flex-1 text-center md:text-left">
                 <h3 className="text-3xl font-bold mb-3">Visionary Leadership</h3>
