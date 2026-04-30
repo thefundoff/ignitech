@@ -1,10 +1,17 @@
-import { ArrowRight, Code, Palette, Users, BookOpen, Target, Eye, Heart, Linkedin, Mail, Phone, MapPin, ExternalLink, Menu, X } from 'lucide-react';
+import { ArrowRight, Code, Palette, BookOpen, Target, Eye, Heart, Linkedin, Mail, Phone, MapPin, ExternalLink, Menu, X, LogOut, ShieldCheck } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import type { Session } from '@supabase/supabase-js';
 import  founder  from "./assets/founder.jpg"
+import { supabase } from './lib/supabase';
+import AdminLogin from './components/AdminLogin';
+import CertificateGenerator from './components/CertificateGenerator';
+import CertificateVerifier from './components/CertificateVerifier';
 
 function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [session, setSession] = useState<Session | null>(null);
+  const [showLogin, setShowLogin] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -13,6 +20,18 @@ function App() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => setSession(session));
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+  };
 
   useEffect(() => {
     if (mobileMenuOpen) {
@@ -32,6 +51,9 @@ function App() {
 
   return (
     <div className="min-h-screen bg-white">
+      {showLogin && (
+        <AdminLogin onClose={() => setShowLogin(false)} onSuccess={() => setShowLogin(false)} />
+      )}
       <style>{`
         html {
           scroll-behavior: smooth;
@@ -65,6 +87,16 @@ function App() {
               <a href="#services" onClick={(e) => { e.preventDefault(); scrollToSection('#services'); }} className="text-gray-700 hover:text-blue-600 transition-colors">Services</a>
               <a href="#projects" onClick={(e) => { e.preventDefault(); scrollToSection('#projects'); }} className="text-gray-700 hover:text-blue-600 transition-colors">Projects</a>
               <a href="#contact" onClick={(e) => { e.preventDefault(); scrollToSection('#contact'); }} className="text-gray-700 hover:text-blue-600 transition-colors">Contact</a>
+              <a href="#verify" onClick={(e) => { e.preventDefault(); scrollToSection('#verify'); }} className="text-gray-700 hover:text-blue-600 transition-colors">Verify Certificate</a>
+              {session ? (
+                <button onClick={handleSignOut} className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-red-500 transition-colors">
+                  <LogOut className="w-4 h-4" /> Sign Out
+                </button>
+              ) : (
+                <button onClick={() => setShowLogin(true)} className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-blue-600 transition-colors">
+                  <ShieldCheck className="w-4 h-4" /> Admin
+                </button>
+              )}
             </div>
             <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="md:hidden">
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -420,6 +452,10 @@ function App() {
           </div>
         </div>
       </section>
+
+      {session && <CertificateGenerator />}
+
+      <CertificateVerifier />
 
       <footer className="bg-gray-900 text-gray-300 py-12 px-6">
         <div className="max-w-7xl mx-auto">
