@@ -108,6 +108,16 @@ function App() {
               <a href="#services" onClick={(e) => { e.preventDefault(); scrollToSection('#services'); }} className="block text-gray-700 hover:text-blue-600 transition-colors py-2">Services</a>
               <a href="#projects" onClick={(e) => { e.preventDefault(); scrollToSection('#projects'); }} className="block text-gray-700 hover:text-blue-600 transition-colors py-2">Projects</a>
               <a href="#contact" onClick={(e) => { e.preventDefault(); scrollToSection('#contact'); }} className="block text-gray-700 hover:text-blue-600 transition-colors py-2">Contact</a>
+              <a href="#verify" onClick={(e) => { e.preventDefault(); scrollToSection('#verify'); }} className="block text-gray-700 hover:text-blue-600 transition-colors py-2">Verify Certificate</a>
+              {session ? (
+                <button onClick={() => { setMobileMenuOpen(false); handleSignOut(); }} className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-red-500 transition-colors py-2">
+                  <LogOut className="w-4 h-4" /> Sign Out
+                </button>
+              ) : (
+                <button onClick={() => { setMobileMenuOpen(false); setShowLogin(true); }} className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-blue-600 transition-colors py-2">
+                  <ShieldCheck className="w-4 h-4" /> Admin
+                </button>
+              )}
             </div>
           )}
         </div>
