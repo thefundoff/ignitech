@@ -98,7 +98,7 @@ function App() {
                 </button>
               )}
             </div>
-            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="md:hidden">
+            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="md:hidden text-gray-800 p-1">
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
@@ -123,8 +123,8 @@ function App() {
         </div>
       </nav>
 
-      <section className="pt-32 pb-20 px-6 relative overflow-hidden bg-cover bg-center bg-no-repeat min-h-screen flex items-center" style={{backgroundImage: 'url("https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1600")'}}>
-        <div className="absolute inset-0 bg-black/45"></div>
+      <section className="pt-32 pb-20 px-6 relative z-0 overflow-hidden bg-cover bg-center bg-no-repeat min-h-screen flex items-center" style={{backgroundImage: 'url("https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1600")'}}>
+        <div className="absolute inset-0 bg-black/45 z-0"></div>
         <div className="max-w-7xl mx-auto w-full relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-6xl md:text-7xl font-bold text-white mb-6 leading-tight animate-fade-in-up stagger-1">
